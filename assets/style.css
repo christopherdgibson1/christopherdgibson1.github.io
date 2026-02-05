@@ -1,0 +1,256 @@
+body {
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+/* Style the header */
+.header {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 30px;
+  text-align: left;
+  font-size: 35px;
+  position: sticky;
+  z-index: 10;
+  top: 0;
+  background-color: white;
+  padding: 10px 0 50px 0;
+  p {
+    line-height: 1.35em;
+    text-align: center;
+    font-size: 40px;
+  }
+}
+
+nav {
+  &.navigation-menu {
+    margin: 0 auto;
+    display: block;
+
+    padding: 0;
+    text-align: center;
+    font-size: 16px;
+
+    ul {
+      padding: 0;
+      > li {
+        list-style: none;
+        margin: 0 auto;
+        border-left: 2px solid #3ca0e7;
+        display: inline-block;
+        padding: 0 10px;
+        position: relative;
+        text-decoration: none;
+        text-align: center;
+        font-family: arvo;
+      }
+    }
+
+    /* Apply right-border only to last direct child */
+    > ul {
+      > li:last-child {
+        border-right: 2px solid #3ca0e7;
+      }
+    }
+
+    li a {
+      color: black;
+    }
+
+    li a:hover {
+      color: #3ca0e7;
+    }
+
+    li:hover {
+      cursor: pointer;
+    }
+
+    ul li ul {
+      visibility: hidden;
+      opacity: 0;
+      position: absolute;
+      padding-left: 0;
+      left: 0;
+      display: none;
+      background: white;
+    }
+
+    ul li:hover > ul,
+    ul li ul:hover {
+      visibility: visible;
+      opacity: 1;
+      display: block;
+      min-width: 250px;
+      text-align: left;
+      padding-top: 20px;
+      box-shadow: 0px 3px 5px -1px #ccc;
+    }
+
+    ul li ul li {
+      clear: both;
+      width: 100%;
+      text-align: left;
+      margin-bottom: 20px;
+      border-style: none;
+    }
+
+    ul li ul li a:hover {
+      padding-left: 10px;
+      border-left: 2px solid #3ca0e7;
+      transition: all 0.3s ease;
+    }
+  }
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      color: #3ca0e7;
+    }
+  }
+
+  ul li ul li a {
+    transition: all 0.5s ease;
+  }
+}
+
+#body-placeholder {
+  padding-top: 50px;
+}
+
+.section-heading {
+  font-size: 30px;
+}
+
+.section-subheading {
+  font-size: 1.25em;
+    max-width: 300px;
+}
+
+.pdf-icon-link {
+  height: 100px;
+  align-items: center; 
+}
+
+.about-container {
+  width: 100vw;
+  background-color: rgb(204, 204, 207);
+  margin: 50px auto;
+  padding: 50px;
+  justify-content: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.about-description {
+  --about-size: 400px;
+  --about-overlap: 15; /* Overlap in percent */
+  background-color: rgb(51, 52, 63);
+  color: white;
+  font-family: Helvetica;
+  font-weight: 100;
+  padding: 20px;
+  line-height: 1.75em;
+  text-align: left;
+  align-content: center;
+  font-size: 16px; /*maybe use vw for scalable viewport width? */
+  width: var(--about-size);
+  height: var(--about-size); /* Square dimensions */
+  position: relative;
+  z-index: 2;
+  margin-right: calc(-1 * var(--about-overlap) * var(--about-size) / 100);
+  p {
+    font-size: 20px;
+    margin: 0 0 10px 0;
+  }
+}
+.headshot {
+  width: 50vw;
+  max-width: 500px;
+  height: auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Employment section */
+.employment-experience {
+  /* font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", sans-serif; */
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 5px;
+  font-size: 16px;
+  padding: 5px;
+  div {
+    align-content: top;
+    /* background-color: #f1f1f1; */
+    text-align: left;
+    padding: 10px;
+  }
+}
+
+.experience-dates {
+  grid-row: span 3;
+  font-size: 20px;
+  max-width: 200px;
+}
+.experience-dates-other {
+  grid-row: span 1;
+  font-size: 20px;
+}
+
+.grid-span-two-rows {
+  grid-row: span 2;
+  font-size: 16px;
+}
+
+.grid-span-two-cols {
+  grid-column: span 2;
+}
+
+.experience-title {
+  font-weight: 900;
+  margin: 0;
+}
+
+.experience-institution {
+  font-style: italic;
+  margin: 0;
+}
+
+.key-responsibilities {
+  text-decoration-line: underline;
+}
+
+/* Style the footer */
+footer {
+  padding: 10px;
+  text-align: center;
+  margin-top: auto;
+  ul {
+    text-align: center;
+    list-style-type: none;
+    margin: auto;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .footer-name {
+    text-align: center;
+    line-height: 1.41em;
+    font-size: 22px;
+  }
+  .footer-email {
+    text-align: center;
+    line-height: 1.875em;
+    font-size: 15px;
+  }
+  .footer-copyright {
+    line-height: 1.79em;
+    text-align: center;
+    font-size: 14px;
+  }
+}
