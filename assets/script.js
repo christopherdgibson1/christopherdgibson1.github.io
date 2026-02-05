@@ -54,7 +54,7 @@ fetch(navHtml)
       .querySelector("#btnTeaching")
       .addEventListener("click", function (event) {
         event.preventDefault();
-        fetchTeaching(teachingHtml, body, "Teaching");
+        fetchSection(teachingHtml, body, "Teaching");
       });
   });
 
