@@ -1,31 +1,8 @@
-let arr = [];
-let txt = document.querySelector("#txt");
-let add = document.querySelector("#add");
 let navMenu = document.querySelector("#nav-placeholder");
-// let navMenu = document.querySelector(".navigation-menu");
 let body = document.querySelector("#body-placeholder");
 let footer = document.querySelector("#footer-placeholder");
-let mainDiv = document.querySelector("#mainDiv");
-let include = "include.html";
-let about = "about.html";
-let homeHtml = "views/home.html";
-let experienceHtml = "views/experience.html";
-let researchHtml = "views/research.html";
-let teachingHtml = "views/teaching.html";
-let count = 1;
 let navHtml = "nav.html";
-let footerHtml = "footer.html";
 let title = document.querySelector("#title-placeholder");
-
-// function addNav(navobj) {
-//     // includes.getAttribute("nav-placeholder");
-//     var file = "nav.html";
-//     navobj.load(file);
-// };
-// addNav(includes);
-// $(function () {
-//     $("#nav-placeholder").load("nav.html");
-//   });
 
 fetch(navHtml)
   .then((response) => response.text())
@@ -35,26 +12,25 @@ fetch(navHtml)
       .querySelector("#btnHome")
       .addEventListener("click", function (event) {
         event.preventDefault();
-        fetchSection(homeHtml, body, "Home");
+        loadView("home");
       });
     document
       .querySelector("#btnExperience")
       .addEventListener("click", function (event) {
         event.preventDefault();
-        fetchSection(experienceHtml, body, "Experience");
-        // setTitle("Experience");
+        loadView("experience");
       });
     document
       .querySelector("#btnResearch")
       .addEventListener("click", function (event) {
         event.preventDefault();
-        fetchSection(researchHtml, body, "Research");
+        loadView("research");
       });
     document
       .querySelector("#btnTeaching")
       .addEventListener("click", function (event) {
         event.preventDefault();
-        fetchSection(teachingHtml, body, "Teaching");
+        loadView("teaching");
       });
   });
 
@@ -67,22 +43,68 @@ function fetchSection(viewPage, section, pageTitle) {
     .then((title.innerHTML = pageTitle));
 }
 
-function fetchTeaching(viewPage, section, pageTitle) {
-  fetch(viewPage)
-    .then((response) => response.text())
-    .then((data) => {
-      section.innerHTML = data;
-      console.log("section", section.querySelector("#macroIcon").innerHTML);
-    })
-    .then((title.innerHTML = pageTitle))
-    .then(
-      fetch("macro.html")
-        .then((response) => response.text())
-        .then((datanew) =>
-          section.querySelector("#macroIcon").innerHTML = datanew),
-   
-    );
+function getCourseIcons() {
+  let courses = [
+    "macro",
+    "micro",
+    "financialMarkets",
+    "principles",
+    "intermediate",
+    "risk",
+    "grad",
+  ];
+  courses.forEach((course) => {
+    fetch(`/assets/images/${course}.svg`)
+      .then((response) => response.text())
+      .then((svg) => {
+        document.getElementById(`${course}Icon`).innerHTML = svg;
+      })
+      .catch((error) => console.error("SVG load failed:", error));
+  });
 }
 
-fetchSection(homeHtml, body, "Home");
-// fetchSection(footerHtml, footer);
+const viewCallbacks = {
+  teaching: () => getCourseIcons(),
+};
+
+function loadView(viewName) {
+  fetch(`views/${viewName}.html`)
+    .then((response) => {
+      if (!response.ok) throw new Error("View not found");
+      return response.text();
+    })
+    .then((html) => {
+      body.innerHTML = html;
+      title.innerHTML = viewName.charAt(0).toUpperCase() + viewName.slice(1);
+      history.pushState({ view: viewName }, "", `/${viewName}`);
+      if (viewCallbacks[viewName]) {
+        viewCallbacks[viewName]();
+      }
+    })
+    .catch((error) => {
+      // Fallback to home view or show error message
+      console.error("Failed to load view:", error);
+      loadView("home"); // show a "page not found" message?
+    });
+}
+
+// Listen for back/forward button
+window.addEventListener("popstate", (event) => {
+  if (event.state && event.state.view) {
+    loadView(event.state.view);
+  } else {
+    // Load default/home view
+    loadView("home");
+  }
+});
+
+// Handle refresh - check URL on page load
+window.addEventListener("DOMContentLoaded", () => {
+  const path = window.location.pathname.replace("/", "");
+  console.log("Path on load:", path);
+  if (path && path !== "index.html") {
+    loadView(path);
+  } else {
+    loadView("home"); // default view
+  }
+});
