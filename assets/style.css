@@ -1,3 +1,7 @@
+:root {
+  --experience-description-width: 500px;
+}
+
 @font-face {
   font-family: "Avenir Light";
   src: url("/assets/fonts/Avenir LT Std Light.otf");
@@ -139,6 +143,7 @@ nav {
 .section-heading {
   font-size: 30px;
   text-align: left !important;
+  padding-bottom: 30px;
 }
 
 .section-subheading {
@@ -149,7 +154,9 @@ nav {
 }
 
 .pdf-icon-link {
-  height: 100px;
+  img {
+    height: 100px;
+  }
   align-items: center;
 }
 
@@ -195,33 +202,65 @@ nav {
   z-index: 1;
 }
 
-/* Employment section */
-.employment-experience-grid {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 5px;
-  font-size: 16px;
-  padding: 5px;
-  div {
-    align-content: top;
-    /* background-color: #f1f1f1; */
-    text-align: left;
-    padding: 10px;
-  }
+/* Experience section */
+.experience-container {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  padding-bottom: 30px;
+}
+
+.teaching-philosophy-container {
+  /* display: flex;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  padding-bottom: 30px; */
+  width: 80%;
+  margin: auto;
 }
 
 .experience-dates {
-  grid-row: span 3;
-  font-size: 20px;
+  flex: 1 1 300px; /* Grows, shrinks, min 300px */
   max-width: 200px;
-}
-.experience-dates-other {
-  grid-row: span 1;
   font-size: 20px;
+}
+
+.research-title {
+  display: grid;
+  justify-items: center;
+  /* flex: 1 1 300px; Grows, shrinks, min 300px */
+  /* min-width: 200px; */
+  max-width: 300px;
+  font-size: 1.25em;
+  font-family: "Avenir Heavy", Arial, Helvetica, sans-serif;
+}
+
+.experience-description {
+  flex: 1 1 300px; /* Same flex basis */
+  min-width: 500px;
+}
+
+@media (max-width: 860px) {
+  .experience-description {
+    min-width: 0;
+    flex-basis: 100%;
+  }
+  .research-title {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    max-width: none;
+  }
+  .pdf-icon-link {
+    img {
+      height: 75px;
+    }
+  }
 }
 
 .teaching-experience-grid {
   display: grid;
+  margin: auto;
   grid-template-columns: 20% 75%;
   width: 70%;
   gap: 5px;
@@ -232,31 +271,14 @@ nav {
     align-content: top;
     /* background-color: #f1f1f1; */
     text-align: left;
-    /* font-size: 20px; */
     padding: 10px;
   }
 }
 
 .teaching-philosophy {
-  grid-row: span 1;
+  flex: 1 1 300px;
+  max-width: 200px;
   font-size: 24px;
-}
-
-.grid-two-columns {
-  display: grid;
-  grid-template-columns: 33.3% 33.3%;
-  justify-content: center;
-  grid-auto-rows: minmax(100px, auto);
-  /* gap: 5px; */
-  grid-column-gap: 10%;
-  font-size: 16px;
-  padding: 5px;
-  div {
-    align-content: top;
-    /* background-color: #f1f1f1; */
-    text-align: center;
-    padding: 10px;
-  }
 }
 
 .course-icon {
