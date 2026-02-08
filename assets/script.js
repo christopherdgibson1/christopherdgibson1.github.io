@@ -76,6 +76,7 @@ function loadView(viewName) {
     .then((html) => {
       body.innerHTML = html;
       title.innerHTML = viewName.charAt(0).toUpperCase() + viewName.slice(1);
+      document.querySelector("#checkNav").checked = false;
       history.pushState({ view: viewName }, "", `/${viewName}`);
       if (viewCallbacks[viewName]) {
         return Promise.resolve(viewCallbacks[viewName]());
