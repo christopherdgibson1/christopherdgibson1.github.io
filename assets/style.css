@@ -125,11 +125,11 @@ body {
   .side-image-container {
     flex-direction: column;
   }
-  
+
   .side-image {
     max-width: 100%;
   }
-  
+
   .side-image-text {
     font-size: 8vw;
   }
@@ -261,16 +261,34 @@ nav {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      transition: all 0.3s;
+      transition: all 0.3s ease;
+
+      .menu-icon-item {
+        position: absolute;
+        top: 20px;
+        right: 100%; /* Position to the left of the menu */
+        margin-right: 20px;
+        border-bottom: none !important; /* No underline on icon */
+        border-left: none;
+        width: auto;
+        padding: 0;
+      }
       li {
         border-left: none;
         position: relative;
-        margin: 20px 0;
-        width: calc(100%);
+        margin: 0; /* Remove vertical margin */
+        width: 20%; /* Control underline width */
+        padding: 20px 0; /* Vertical padding for spacing */
+        border-bottom: 2px solid #3ca0e7; /* Underline between items */
+        background-color: white;
+        &:last-child {
+          border-bottom: none; /* Remove underline on last item */
+        }
+
         a {
           font-size: 20px;
-          width: calc(100%);
-          justify-content: left;
+          width: 100%;
+          display: block;
         }
         div {
           display: none;
@@ -281,21 +299,24 @@ nav {
       }
     }
   }
-
   #checkNav:checked ~ ul {
     right: 0;
     align-content: center;
+    .menu-icon-item {
+      /* right: 0; Move icon to the right edge of the menu */
+      margin-right: -80px;
+      padding-left: 20px;
+      transition: 0.3s ease;
+    }
     li {
-              padding:20px;
-              border-left: none;
-              /* border-bottom: 2px solid #3ca0e7; */
+      border-left: none;
+      border-right: none;
+      padding: 20px 0;
       a {
-        position: relative;
-        width: calc(100%);
         &:hover {
           padding-left: 10px;
-      border-left: 2px solid #3ca0e7;
-      transition: all 0.3s ease;
+          border-left: 2px solid #3ca0e7;
+          transition: all 0.3s ease;
           div {
             display: none;
           }
